@@ -37,12 +37,13 @@ class FrontEndTestCase(TestCase):
     def test_details_only_published(self):
         for count in range(1, 11):
             title = "Post %d Title" % count
-            post = Post.objects.get(title=title)
-            resp = self.client.get('/posts/%d/' % post.pk)
             if count < 6:
+                post = Post.objects.get(title=title)
+                resp = self.client.get('/posts/%d/' % post.pk)
                 self.assertEqual(resp.status_code, 200)
                 self.assertContains(resp, title)
             else:
+                resp = self.client.get('/posts/%d/' % count)
                 self.assertEqual(resp.status_code, 404)
 
 class PostTestCase(TestCase):
