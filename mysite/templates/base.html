@@ -6,7 +6,7 @@
         <link type="text/css" rel="stylesheet" href="{% static 'django_blog.css' %}"/>
     </head>
     <body>
-        <div id="head">
+        <div id="header">
             <ul id="control-bar">
             {% if user.is_authenticated %}
                 {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">admin</a></li>{% endif %}
