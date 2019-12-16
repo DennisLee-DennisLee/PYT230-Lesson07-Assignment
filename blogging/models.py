@@ -13,10 +13,6 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-# @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    pass
-
 class Category(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
@@ -28,9 +24,14 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
-# @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     exclude = ('posts', )
 
 class CategoryInline(admin.TabularInline):
-    model = CategoryAdmin
+    model = Category.posts.through
+
+class PostAdmin(admin.ModelAdmin):
+    inlines = [
+        CategoryInline,
+    ]
+    exclude = ('posts', )
