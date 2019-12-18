@@ -35,3 +35,4 @@ class PostAdmin(admin.ModelAdmin):
         CategoryInline,
     ]
     exclude = ('posts', )
+    on_delete = models.SET_NULL
